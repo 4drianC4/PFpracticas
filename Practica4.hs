@@ -62,6 +62,7 @@ nrep xs = foldr (ret) [] xs
     where
         rem = (nmin xs)
         ret x xs = rem:xs
+
 --12. Una función que reciba una lista y retorne true si la lista está
 --ordenada ascendentemente, false en otro caso.
 

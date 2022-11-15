@@ -165,88 +165,220 @@ ins1 (a,m,d,h,min,s)
     |(d == 30 || d == 31) && m < 12 = (a,m+1,1,00,00,00) 
     |m == 12 = (a+1,1,1,00,00,00)
     |otherwise = (a,m,d,h,min,s+1)
+
 --EJERCICIOS 4 (Usando case)
 
 --1. Definir una función que reciba una vocal y retorne la siguiente
+sigvoc:: Char -> Char
+sigvoc v =
+    case v of
+       'a' -> 'e'
+       'e' -> 'i'
+       'i' -> 'o'
+       'o' -> 'u'
+       'u' -> 'a'
+       _ -> '?'
 
 --2. Definir una función que reciba un dígito y retorne su literal
+diglit:: Int -> String
+diglit d =
+    case d of
+        1 -> "uno"
+        2 -> "dos"
+        3 -> "tres"
+        4 -> "cuatro"
+        5 -> "cinco"
+        6 -> "seis"
+        7 -> "siete"
+        8 -> "ocho"
+        9 -> "nueve"
+        0 -> "cero"
+        _ -> "?"
 
 --3. Suponiendo que representamos los valores lógicos por 1 y 0 (true y 
 --false), definir una función que reciba dos valores lógicos y retorne 
 --el resultado de aplicarle la operación and
+myand q r =
+    case (q,r) of
+        (1,1) -> 1
+        (_,_)-> 0
 
 --4. Idem a 3 pero para or
-
+myor q r =
+    case (q,r) of
+        (0,0) -> 0
+        (_,_)-> 1
 --5. Idem a 3 para xor
-
+myxor q r =
+    case (q,r) of
+        (1,1) -> 0
+        (0,0) -> 0
+        (_,_) -> 1
 --6. Idem a 3 pero que reciba como argumento la operación que se realizará.
-
+arlog ar = ar
 --7. Definir una función que reciba un número de dos dígitos y retorne su
 --literal
-
+diglit2 x =    
+    case (d2,d1) of
+        (1,0) -> "diez"
+        (1,1) -> "once"
+        (1,2) -> "doce"
+        (1,3) -> "trece"
+        (1,4) -> "catorce"
+        (1,5) -> "quince"
+        (1,_) -> concat ["dieci", diglit d1]
+        (2,0) -> "veinte"
+        (2,_) -> concat["veinti",diglit d1]
+        (3,0) -> "trenta"
+        (3,_) -> concat["treintai",diglit d1] 
+        (4,0) -> "cuarenta"
+        (4,_) -> concat["cuarentai",diglit d1]
+        (5,0) -> "cincuenta"
+        (5,_) -> concat["cincuentai",diglit d1]
+        (6,0) -> "sesenta"
+        (6,_) -> concat["sesentai",diglit d1]
+        (7,0) -> "setenta"
+        (7,_) -> concat["setentai",diglit d1]
+        (8,0) -> "ochenta"
+        (8,_) -> concat["ochentai",diglit d1]
+        (9,0) -> "noventa"
+        (9,_) -> concat["noventai",diglit d1]
+        _ -> case x < 10 && x > 100 of
+                _ -> diglit x
+    where
+        d1 = mod x 10
+        d2 = div x 10
 --8. Definir una función que reciba un número de tres dígitos y retorne su
 --literal
+    --LARGO
 
 --9. Definir una función que reciba dos números y retorne el menor
+menorv2 n1 n2 = 
+    case (n1 >= n2) of
+        False -> n1
+        True -> n2
 
 --10. Definir una función que reciba 6 números y devuelva el menor
+menor6 n1 n2 n3 n4 n5 n6 =
+    case (n1 <= n2 && n1 <= n3 && n1 <= n4 && n1 <= n5 && n1 <= n6) of
+        True -> n1
+        false -> case (n2 <= n1 && n2 <= n3 && n2 <= n4 && n2 <= n5 && n2 <= n6) of
+                    True -> n2
+                    False -> case (n3 <= n1 && n3 <= n2 && n3 <= n4 && n3 <= n5 && n3 <= n6) of
+                                True -> n3
+                                False -> case (n4 <= n1 && n4 <= n2 && n4 <= n3 && n4 <= n5 && n4 <= n6) of
+                                            True -> n4
+                                            False -> case (n4 <= n1 && n4 <= n2 && n4 <= n3 && n4 <= n5 && n4 <= n6) of
+                                                        True -> n4
+                                                        False -> case (n5 <= n1 && n5 <= n2 && n5 <= n3 && n5 <= n4 && n5 <= n6) of
+                                                                    True -> n5
+                                                                    False -> case (n6 <= n1 && n6 <= n2 && n6 <= n3 && n6 <= n4 && n6 <= n5) of
+                                                                                True -> n6
 
 --11. Definir una función que reciba 3 números y devuelva el mensaje 
 -- “Sumatoria mayor” si la sumatoria de los números es menor que 20, el 
 --mensaje “Sumatoria menor” si la sumatoria es menor que 10 y el mensaje
 -- “Vacio” en otro caso.
+sumatoriav2 n1 n2 n3 =
+    case (n1+n2+n3) < 10 of
+        True -> "sumatoria menor"
+        False -> case((n1+n2+n3) < 20) of
+                    True -> "sumatoria mayor"
+                    False -> "vacio"
 
 --12. Definir una función que reciba 3 notas que devuelva el mensaje 
 -- “Excelente“ si el promedio esta entre 90-100, “Bien” si esta entre 70-89,
 -- “Regular” si esta entre 51-69 y mal si esta entre 0-50.
-
-
+notac pp sp tp =
+    case (pp + sp)/2 >= 90 || tp >= 90 of
+        True -> "Exelente"
+        False -> case (pp + sp)/2 >= 70 || tp >= 70 of
+                    True -> "Bien"
+                    False -> case (pp + sp)/2 >= 51 || tp >= 51 of
+                                True -> "Regular"
+                                False -> case (pp + sp)/2 >= 0 || tp >= 0 of
+                                    True -> "Mal"
+                                    False -> "?"
 --EJERCICIO 6 (Definiciones locales)
 
 --13. Definir una función que reciba 6 números y devuelva el menor
-
+menor6v2 n1 n2 n3 n4 n5 n6 =
+    let
+        m1 = if (n1 < n2) then n1 else n2
+        m2 = if (n3 < n4) then n3 else n4
+        m3 = if (n5 < n6) then n5 else n6
+    in
+        menorv2 m1 (menorv2 m2 m3)
 --14. Definir una función que reciba 3 números y devuelva el mensaje 
 --Sumatoria mayor” si la sumatoria de los números es menor que 20, el 
 --mensaje “Sumatoria menor” si la sumatoria es menor que 10 y el mensaje 
 -- “Vacio” en otro caso.
+sumatoriav3 n1 n2 n3 = 
+    if(r1 && n1+n2+n3 > 0)then "sumatoria menor" 
+    else if(r2 && n1+n2+n3 > 10)then "sumatoria mayor" 
+    else "vacio"   
+    where
+        r1 = if (n1+n2+n3 < 10) then True else False
+        r2 = if (n1+n2+n3 < 20) then True else False
 
 --15. Definir una función que reciba 3 notas que devuelva el mensaje 
 -- “Excelente“ si el promedio esta entre 90-100, “Bien” si esta entre 70-89,
 -- “Regular” si esta entre 51-69 y mal si esta entre 0-50.
+--inservible
 
 --16. Inventar 3 ejercicios que muestren la utilidad de las definiciones
 -- locales
 
-
 --EJERCICIO 7 (Reconocimiento de patrones)
 
 --1. Definir una función que reciba una fecha y devuelva el día
+devdia f@(d,m,a) = a
 
 --2. Definir una función que reciba una fecha y devuelva el mes
+devmes f@(d,m,a) = m
 
 --3. Definir una función que reciba una fecha y devuelva el año
+devanio f@(d,m,a) = a
 
 --4. Definir una función que reciba 2 quebrados y devuelva el mayor
+quebmay q1@(q1n,q1d) q2@(q2n,q2d) = if(d1 >= d2) then q1 else q2
+    where
+        d1 = q1n/q1d
+        d2 = q2n/q2d
 
 --5. Definir una función que reciba 1 quebrado y lo devuelva reducido
+--redqueb q@(n1,n2) = 
 
 --6. Definir una función que reciba 1 quebrado y devuelva su signo como 
 --carácter
+sigqueb q@(n1,n2) = if (n1 < 0 && n2 < 0)||(n1 > 0 && n2 > 0)then '+' else '-'
 
 --7. Definir una función que reciba 3 fechas y devuelva la fecha menor
+fechmay2 f1@(d1,m1,a1) f2@(d2,m2,a2)
+    |(d1 >= d2 && m1 >= m2 && a1 >= a2) = f1    
+    |(d1 <= d2 && m1 >= m2 && a1 >= a2) = f1
+    |(d1 <= d2 && m1 <= m2 && a1 > a2) = f1                    
+    |otherwise = f2
+
+fechmay3 f1@(d1,m1,a1) f2@(d2,m2,a2) f3@(d3,m3,a3) = fechmay2 (fechmay2 f1 f2) f3 
 
 --8. Definir una función que reciba 2 horas y devuelva la hora mayor
-
+horamay ho1@(h1,min1,s1) ho2@(h2,min2,s2)
+    |(h1 > h2 && min1 > min2 && s1 > s2) = ho1    
+    |(h1 > h2 && min1 > min2 && s1 > s2) = ho1
+    |(h1 > h2 && min1 < min2 && s1 > s2) = ho1                    
+    |otherwise = ho2
 --9. Definir una función que reciba 2 instantes y devuelva el mas reciente
 --(Instante es una fecha, hora, minuto, segundo)
+insta2 i1@(ho1@(h1,min1,s1),f1@(d1,m1,a1)) i2@(ho2@(h2,min2,s2),f2@(d2,m2,a2))
+    |horamay ho1 ho2 == ho1 && fechmay2 f1 f2 == f1 = i1
+    |horamay ho1 ho2 == ho2 && fechmay2 f1 f2 == f1 = i1
+    |otherwise = i2
 
 --10. Definir una función que reciba un número natural y devuelva el
 -- siguiente
 
+
 --11. Definir una función que reciba un quebrado quebrados y devuelva la 
 --simplificación (modelar el quebrado de quebrados como par de pares 
 --((a,b),(c,d))
-
---EJERCICIO 8 (Cálculo lambda)
-
---Usando cálculo lambda definir todas las funciones de la presente práctica

@@ -200,3 +200,82 @@ fun22 x y = x y
 
 cambio xs f=foldr f a xs     
   where a = []
+
+
+--EXAMEN PRIMER PARCIAL
+mif3 g x y = (g ((x +1) , ( (y True)++"xxx"))) + 20
+mif3::((Int,String) -> Int) -> Int -> (Bool -> String) -> Int
+
+ 
+mif2 g x y = g ((x +1) , ( y True))
+mif2::((Int,try) -> trg) -> Int -> (Bool -> try) -> trg
+
+--insertar os fec = fechasMenores ++(fec:fechasMayores)
+insertar os fec = concat[fechasMenores ,[fec],fechasMayores]
+  where
+   fechasMenores = takeWhile (esFechaMayor fec) os
+   fechasMayores = dropWhile (esFechaMayor fec) os
+   esFechaMayor (d1,m1,a1) (d2,m2,a2)
+    = a1>a2 ||
+      (a1==a2 && m1>m2)||
+      (a1==a2 && m1==m2 && d1>d2)
+
+getDiaMes xs year = foldr f a xs
+ where
+  a= [ ]
+  f (d,m,a) rs = if a==year then (d,m):rs else rs
+
+fs= [(2,3,17),(12,5,18), (4,6,17),(9,2,17),(8,8,16),(5,7,17)]
+ps=[(1,2,3),(1,5,3),(2,2,4),(3,3,5),(4,4,5)]
+
+mif x y g = g (x+1,y 5)
+
+mif:: Int -> (Int -> try ) -> ((Int , try ) -> trg ) -> trg
+
+fun11 x y z w u
+      |x (&&) y = (\a -> a>2)
+      |z && w = u
+
+fun22 x y = x y
+
+fun33::(Char -> Int) -> ((Bool -> Int)-> Char) -> (Char -> Int) 
+fun33 fx fy = fx
+  where
+    fx c1 = 2
+    fy b n2 = 'a'
+
+exa xs ys = saca xs ys
+  where
+    pos xs ys = length( takeWhile (==True) (zipWith (==) xs ys))
+    saca xs ys = (pos,(!!(pos xs ys)) xs, (!!(pos xs ys)) ys)
+
+descomprimir xs = concat(map g xs)
+  where
+    g (c,n) = map (rem c) [0..n-1]
+    rem x n = x 
+
+listarar ls ar = div (soloAl (filar ls ar)) (tamfilar ls ar)
+  where
+    soloar ar2 l@(_,_,ar1,numAl,_) = ar1 == ar2
+    filar ls ar = filter (soloar ar) ls
+    tamfilar ls ar = length (filar ls ar)
+    sacAl l@(_,_,ar,numAl,_) = numAl
+    soloAl ls = (sum (map sacAl ls))
+
+ms = [("INF100", "TallerI","Prg",55,20),
+    ("INF101","ProgramacionI","Prg",60,30),
+        ("MAT202","CalculoII","Ex",70,35),
+            ("MAT102","CalculoI","Ex",80,45),
+                ("ADM102","AdministracionII","An",90,50)]
+
+mat = ("INF106","TallerI","Prg",72,32)
+
+procesar ls ar = div (sum (map fun2(filter(fun1 ar)ls))) (length (filter (fun1 ar)ls))
+  where
+    fun1 = (\ar -> \(a,b,c,d,e) -> ar == c)
+    fun2 = (\(a,b,c,d,e) -> d)
+
+--fun :: (Ord a, Num a) =>((Char -> Bool) -> Bool)-> (Bool -> Bool, a) -> (Bool -> Bool, a) -> (Bool -> Bool, a)
+--fun x y@(z,w) s 
+--      |x(\a -> a == 's') = s
+--      |z((>2)w) = y

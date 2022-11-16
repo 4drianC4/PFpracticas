@@ -34,10 +34,21 @@ partede x xs = or [y == x | y <- xs]
 
 --8. Una función que reciba dos conjuntos y devuelva la intersección de
 --los mismos
---9. Una función que reciba un elemento un un conjunto y eleimine el
---elemento del conjunto
+inter xs ys = [y | x <- xs, y <- ys, x == y]
+
+--9. Una función que reciba un elemento un conjunto y elimine el elemento 
+--del conjunto
+elim x xs = [y | y <- xs, x /= y]
+
 --10. Una función que implemente la unión de dos conjuntos.
+union xs ys = [x | x <- xs++ys]
+
 --11. Una función que reciba una matriz y devuelva su diagonal principal
+
+
+--transpuesta de una matriz
+transpo xss = [ mymap (!!y) xss | y <- [0..(mylength xss)-1]]
+
 --12. Una función que reciba una matriz y devuelva su diagonal secundaria
 --13. Una función que reciba una matriz y devuelva True si esta es un
 --cuadrado perfecto

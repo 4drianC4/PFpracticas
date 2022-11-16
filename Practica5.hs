@@ -26,10 +26,12 @@ encrip cs = [f c | c <- cs]
             |otherwise = d
 
 --6. Una función que realice el producto cartesiano de dos conjuntos
-
+fcart xs ys = [(x,y) | x <- xs, y <- ys]
 
 --7. Una función que reciba un conjunto y un elemento y devuelva True si
 --el elemento pertenece al conjunto, falso en otro caso.
+partede x xs = or [y == x | y <- xs]
+
 --8. Una función que reciba dos conjuntos y devuelva la intersección de
 --los mismos
 --9. Una función que reciba un elemento un un conjunto y eleimine el

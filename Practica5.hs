@@ -44,12 +44,14 @@ elim x xs = [y | y <- xs, x /= y]
 union xs ys = [x | x <- xs++ys]
 
 --11. Una función que reciba una matriz y devuelva su diagonal principal
-
+diagop xss = [ (!!y)((!!y) xss) | y <- [0..(mylength xss)-1]]
 
 --transpuesta de una matriz
 transpo xss = [ mymap (!!y) xss | y <- [0..(mylength xss)-1]]
 
 --12. Una función que reciba una matriz y devuelva su diagonal secundaria
+diagos xss = reverse[(!!y)((!!y) (reverse xss)) | y <- [0..(mylength xss)-1]]
+
 --13. Una función que reciba una matriz y devuelva True si esta es un
 --cuadrado perfecto
 --14. Una función que multiplique 2 matrices

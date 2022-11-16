@@ -1,16 +1,33 @@
 --PRACTICA LISTAS POR COMPRENSIÓN
+
 --I. Aplicando Listas por Comprensión, definir:
 --1. filter
-
+myfilter d xs= [x | x <- xs, (d)x]
 
 --2. map
+mymap f xs = [f x | x <- xs]
 
 --3. concat
+myconcat xss = [x | xs<-xss, x <- xs]
+
 --4. length
+mylength xs = sum [1 | _ <- xs]
+
 --5. Una función que reciba una cadena y la encripte, cambiando las 
---vocales por los
---caracteres correspondientes a los dígitos 1,2,3,4,5 respectivamente.
+--vocales por los caracteres correspondientes a los dígitos 1,2,3,4,5 
+--respectivamente.
+encrip cs = [f c | c <- cs]
+    where 
+        f d |d == 'a' = '1'
+            |d == 'e' = '2'
+            |d == 'i' = '3'
+            |d == 'o' = '4'
+            |d == 'u' = '5'
+            |otherwise = d
+
 --6. Una función que realice el producto cartesiano de dos conjuntos
+
+
 --7. Una función que reciba un conjunto y un elemento y devuelva True si
 --el elemento pertenece al conjunto, falso en otro caso.
 --8. Una función que reciba dos conjuntos y devuelva la intersección de

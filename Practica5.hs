@@ -54,7 +54,11 @@ diagos xss = reverse[(!!y)((!!y) (reverse xss)) | y <- [0..(mylength xss)-1]]
 
 --13. Una función que reciba una matriz y devuelva True si esta es un
 --cuadrado perfecto
+cupe xss = and[y | x <- [mymap (mylength) xss], y <- mymap(==mylength x) x ]
+
 --14. Una función que multiplique 2 matrices
+multmat xss yss = 
+
 --15. Una función que reciba un número y devuelva True si es primo
 --16. zipWith
 --17. zip3 (hace lo mismo que zip pero con 3 listas, devuelve una lista

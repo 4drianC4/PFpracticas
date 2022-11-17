@@ -202,42 +202,6 @@ cambio xs f=foldr f a xs
   where a = []
 
 
---EXAMEN PRIMER PARCIAL
-mif3 g x y = (g ((x +1) , ( (y True)++"xxx"))) + 20
-mif3::((Int,String) -> Int) -> Int -> (Bool -> String) -> Int
-
- 
-mif2 g x y = g ((x +1) , ( y True))
-mif2::((Int,try) -> trg) -> Int -> (Bool -> try) -> trg
-
---insertar os fec = fechasMenores ++(fec:fechasMayores)
-insertar os fec = concat[fechasMenores ,[fec],fechasMayores]
-  where
-   fechasMenores = takeWhile (esFechaMayor fec) os
-   fechasMayores = dropWhile (esFechaMayor fec) os
-   esFechaMayor (d1,m1,a1) (d2,m2,a2)
-    = a1>a2 ||
-      (a1==a2 && m1>m2)||
-      (a1==a2 && m1==m2 && d1>d2)
-
-getDiaMes xs year = foldr f a xs
- where
-  a= [ ]
-  f (d,m,a) rs = if a==year then (d,m):rs else rs
-
-fs= [(2,3,17),(12,5,18), (4,6,17),(9,2,17),(8,8,16),(5,7,17)]
-ps=[(1,2,3),(1,5,3),(2,2,4),(3,3,5),(4,4,5)]
-
-mif x y g = g (x+1,y 5)
-
-mif:: Int -> (Int -> try ) -> ((Int , try ) -> trg ) -> trg
-
-fun11 x y z w u
-      |x (&&) y = (\a -> a>2)
-      |z && w = u
-
-fun22 x y = x y
-
 fun33::(Char -> Int) -> ((Bool -> Int)-> Char) -> (Char -> Int) 
 fun33 fx fy = fx
   where

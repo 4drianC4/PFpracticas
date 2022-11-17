@@ -2,6 +2,7 @@
 
 --I. Aplicando Listas por Comprensión, definir:
 --1. filter
+
 myfilter d xs= [x | x <- xs, (d)x]
 
 --2. map
@@ -46,9 +47,6 @@ union xs ys = [x | x <- xs++ys]
 --11. Una función que reciba una matriz y devuelva su diagonal principal
 diagop xss = [ (!!y)((!!y) xss) | y <- [0..(mylength xss)-1]]
 
---transpuesta de una matriz
-transpo xss = [ mymap (!!y) xss | y <- [0..(mylength xss)-1]]
-
 --12. Una función que reciba una matriz y devuelva su diagonal secundaria
 diagos xss = reverse[(!!y)((!!y) (reverse xss)) | y <- [0..(mylength xss)-1]]
 
@@ -57,24 +55,44 @@ diagos xss = reverse[(!!y)((!!y) (reverse xss)) | y <- [0..(mylength xss)-1]]
 cupe xss = and[y | x <- [mymap (mylength) xss], y <- mymap(==mylength x) x ]
 
 --14. Una función que multiplique 2 matrices
-multmat xss yss = 
+--definir zipWith y transpuesta luego definir tales funciones
+mat1 = [[1,2,3],[4,5,6],[7,8,9]]
+mat2 = [[1,2,3],[3,2,1],[1,1,1]]
 
---15. Una función que reciba un número y devuelva True si es primo
+--myZipWith
+mizipw f xs ys = [ f x y | i <- [0..min (length xs) (length ys) - 1], let x = xs !! i, let y = ys !! i ]
+
+--transpuesta de una matriz
+transpo xss = [ mymap (!!y) xss | y <- [0..(mylength xss)-1]]
+
+-----------OJO----------
+
+--casilla matriz
+doCasilla xs ys = sum(mizipw (*) xs ys)
+
+--filamatriz
+doFila xss ys = mymap(doCasilla ys) xss
+
+--matriz matriz
+mat fss css = mymap (doFila css) fss
+
+mult xss yss = mat xss (transpo yss)
+
+--15. Una función que reciba una lista de números y devuelva True si todos 
+--son primos
+--para un numero
+primo p = and[(mod p x) /= 0 | x <- [2..p-1]]
+--para varios
+primos ps = map primo ps
+
 --16. zipWith
+myZipWith f xs ys = [ f x y | i <- [0..min (length xs) (length ys) - 1], let x = xs !! i, let y = ys !! i ]
+
 --17. zip3 (hace lo mismo que zip pero con 3 listas, devuelve una lista
 --de triplas)
 --18. zip4 (hace lo mismo que zip pero con 4 listas, devuelve una lista 
 --de tuplas de 4 elementos)
+
 --19. Definir una función que reciba una lista y una función de orden y 
 --devuelva la verdad si la lista esta ordenada de acuerdo a una función
 --de orden
---II. Evaluar las siguientes expresiones (hacer en
---papel y verificar en la computadora):
---1. [x|x<-[y|y<-[2,3,4,5], even y], odd x]
---2. [[1|x<-[2|y<-[1..10]],even x]|z<-[1..5]]
---3. [even x|x<-[y|y<-[1..20],y>5],odd x]
---4. [x|x<-[[[1,2,3,4]]],x<-x,x<-x]
---5. [[x|x<-[1,2,3],x<-y]|y<-[[‘a’,’b’,’c’],[‘d’,’e’],[‘h’,’i’,’j’]]
---6. [[x<-[1,2,3,4]]| x<-[1,2,3], y <-[2,3]]
---7. [[x<-[1,2,3,4]]| x<-[1,2,3], y <-[]]
---8. [[x<-[1,2,3,4]]| x<-[1,2,3], y <-[2..x]]

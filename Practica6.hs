@@ -1,10 +1,23 @@
 --PRÁCTICA Recursividad
 --1. Definir una función que compare 2 listas y devuelva True si las 
 --listas son iguales
+comp [] ys = []
+comp xs [] = []
+comp (x:xs) (y:ys) = if((length xs) == (length ys)) then (x == y):(comp xs ys) 
+                    else [False]
+listiguales xs ys = and (comp xs ys)
+
 --2. Definir una función que fusione 2 listas ordenadas en una 3ra. 
 --ordenada (sin necesidad de ordenar).
+
+ord [] ys = []
+ord (x:xs) ys = x:(ord xs ys)
+
+
 --3. Definir una función que verifique si una lista de listas podría ser 
 --considerada una matriz
+
+
 --4. Definir una función que reciba 1 matriz y una función de orden y 
 --devuelva True si la matriz esta ordenada de acuerdo a la función de 
 --orden.

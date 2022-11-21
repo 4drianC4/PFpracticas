@@ -17,6 +17,11 @@ ord (x:xs) ys = x:(ord xs ys)
 --3. Definir una función que verifique si una lista de listas podría ser 
 --considerada una matriz
 
+mylength [] = 0
+mylength (x:xs) = (mylength xs) + 1
+
+vmat [] = []
+vmat (x:xs) = if ((mylength x) == mylength (head xs)) then True:vmat xs else [False]
 
 --4. Definir una función que reciba 1 matriz y una función de orden y 
 --devuelva True si la matriz esta ordenada de acuerdo a la función de 
@@ -56,3 +61,7 @@ ord (x:xs) ys = x:(ord xs ys)
 --22. Definir una función (g xs ys ) que devuelva las posiciones de inicio
 --donde xs está en ys. Por ejemplo: 
 --g [1,1,1] [3,1,1,1,1,4,1,1,3,1,1,1,7] => [1,2,9]
+
+
+--definir la función suma de dos números naturales y devuelva el resultado
+--suma::Natural -> Natural -> Natural

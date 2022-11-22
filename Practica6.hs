@@ -60,20 +60,28 @@ longpars (xs:xss) = if (f == 0) then xs:longpars xss else longpars xss
 
 nopars [] = []
 nopars (x:xs) = if (mod x 2 /= 0) then x:nopars xs else nopars xs 
+
 noparss [] = []
---nopars [_] = []
 noparss (xs:xss) = if (mod x 2 /= 0) then ((nopars xs):noparss xss) else (noparss xss)
     where x = head (xs) 
 
 --8. Definir una función que reciba una lista de listas y devuelva una 
 --lista formada por los penúltimos elementos de las listas
+penultl[] = [] 
+penultl (x:xs) = if(mylength xs == 1) then x:penultl xs else penultl xs  
 
-
+penultll [] = []
+penultll (xs:xss) = ((penultl xs):penultll xss)
 
 --9. Definir una función que reciba un número y devuelva una lista con los
 --posibles divisores del número.
 
-
+divl x r
+        |r <= 0 = []
+        |(mod x r == 0) = r :divl x (r-1)
+        |otherwise = divl x (r-1)
+ 
+posibles x = divl x x
 
 --10. Definir una función que busque un elemento en una lista mediante 
 --búsqueda secuencial (la función debería devolver la posición donde se
@@ -84,14 +92,29 @@ noparss (xs:xss) = if (mod x 2 /= 0) then ((nopars xs):noparss xss) else (nopars
 --11. Definir una función que busque un elemento en una lista mediante 
 --búsqueda binaria (la función debería devolver la posición donde está el
 --elemento).
+
+
+
 --12. Definir una función que realice el ordenamiento de una lista de
 --números por el método de Selección Directa
+
+
+
 --13. Definir una función que realice el ordenamiento de una lista de
 --números por el método de Inserción Directa
+
+
+
 --14. Definir una función que realice el ordenamiento de una lista de
 --números por el método de Intercambio Directo o Burbuja
+
+
+
 --15. Definir una función que realice el ordenamiento de una lista de
 --números por el método de QuickSort.
+
+
+
 --16. Definir una función que reciba una matriz y devuelva su transpuesta
 --17. Definir una función que reciba 2 matrices y las multiplique
 --18. Definir una función que reciba 3 matrices y las multiplique
@@ -100,10 +123,11 @@ noparss (xs:xss) = if (mod x 2 /= 0) then ((nopars xs):noparss xss) else (nopars
 --productoria
 --21. Definir una función (f xs ys ) que verifique si la lista xs está 
 --incluida en la lista ys, devolviendo verdadero o falso según caso.
+
+
+
 --22. Definir una función (g xs ys ) que devuelva las posiciones de inicio
 --donde xs está en ys. Por ejemplo: 
 --g [1,1,1] [3,1,1,1,1,4,1,1,3,1,1,1,7] => [1,2,9]
-
-
 --definir la función suma de dos números naturales y devuelva el resultado
 --suma::Natural -> Natural -> Natural

@@ -87,7 +87,10 @@ posibles x = divl x x
 --búsqueda secuencial (la función debería devolver la posición donde se
 --encuentra el elemento).
 
+bsec n [] r = []
+bsec n (x:xs) r =if(n /= x) then bsec n xs (r+1) else (r):bsec n xs (r+1)
 
+busquedasec n xs = bsec n xs 0
 
 --11. Definir una función que busque un elemento en una lista mediante 
 --búsqueda binaria (la función debería devolver la posición donde está el

@@ -134,3 +134,9 @@ busquedasec n xs = bsec n xs 0
 --g [1,1,1] [3,1,1,1,1,4,1,1,3,1,1,1,7] => [1,2,9]
 --definir la función suma de dos números naturales y devuelva el resultado
 --suma::Natural -> Natural -> Natural
+
+nummenor [] = error "?"
+nummenor [x] = x
+nummenor (x:xs)
+        |x <= (nummenor xs) = x
+        |otherwise = (nummenor xs)

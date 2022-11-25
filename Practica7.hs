@@ -89,13 +89,44 @@ gob p1@(n1,(f1@(_,_,a1),f2@(_,_,a2))) p2@(n2, (f3@(_,_,a3),f4@(_,_,a4))) = if (t
 --4. Una función que reciba una lista de presidentes y devuelva el nombre
 --   del presidente que menos tiempo gobernó.
 
+name:: Presidente -> Nombre
+name (n,((_,_,_),(_,_,_))) = n
+
+type ListPres = [Presidente]
+mengob:: ListPres -> Presidente
+mengob [] = error "?"
+mengob [x] = x
+mengob (x:xs) = if(gob x (mengob xs) == x)then x else mengob xs
+
+presidentetiempomen :: ListPres -> Nombre
+presidentetiempomen xs = name (mengob xs)
 
 --5. Una función que reciba una lista de presidentes y devuelva una lista
 --   con los nombres de los presidentes que gobernaron antes del año 1990.
+
+anio:: Presidente -> Anio
+anio (_,((_,_,_),(a2,_,_))) = a2
+
+listaPr:: ListPres -> ListPres
+listaPr [] = []
+listaPr (x:xs) = if(anio x < 1990) then x:listaPr xs else listaPr xs
+
 --6. Una función que reciba una lista de presidentes y devuelva la 
 --   cantidad de presidentes que gobernaron menos de 4 años.
+
+prconmenos4:: ListPres -> ListPres
+prconmenos4 [] = []
+prconmenos4 (x:xs) = if(tpr x < 4) then x:prconmenos4 xs else prconmenos4 xs
+
 --7. Una función que reciba una lista de presidentes y la ordene 
 --   ascendentemente por la fecha en que fue presidente.
+
+orde [] = []
+orde (x:xs) =  aux xs x []
+    where aux [] m r = m : orde r
+          aux (x:xs) m r | x < m     = aux xs x (m:r)
+                         | otherwise = aux xs m (x:r)
+ 
 
 --III. Sea el siguiente tipo de datos:
 --data Empleado = Docente Nombre Horas SueldoHra Materias

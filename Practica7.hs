@@ -129,24 +129,65 @@ orde (x:xs) =  aux xs x []
  
 
 --III. Sea el siguiente tipo de datos:
---data Empleado = Docente Nombre Horas SueldoHra Materias
--- | Administrativo Nombre Salario Cargo
---type Nombre=String
---type Horas=Int -- total de horas por mes
---type SueldoHora=Float -- sueldo por hora
---type Salario=Float -- salario mensual de el empleado
---type Materia= [String] -- materias que dicta el docente
---type Cargo=String -- cargo del administrativo
+data Empleado = Docente Nombree Horas SueldoHora Materia | Administrativo Nombree Salario Cargo
+    deriving Show 
+type Nombree=String
+type Horas=Int -- total de horas por mes
+type SueldoHora=Float -- sueldo por hora
+type Salario=Float -- salario mensual de el empleado
+type Materia= [String] -- materias que dicta el docente
+type Cargo=String -- cargo del administrativo
 --a) Definir una función que reciba dos empleados y devuelva verdad si
 --   ambos tienen el mismo ingreso mensual pero uno es docente y el otro 
 --   es administrativo.
+compara:: SueldoHora -> Salario -> Bool
+compara sue sal = sue == sal
+
+salario:: Empleado -> SueldoHora
+salario (Docente _ _ s _) = s
+salario (Administrativo _ s _) = s
+
+comparaSalario :: Empleado -> Empleado -> Bool
+comparaSalario d a = compara (salario d) (salario a)
+
+doc1 = Docente "Juan" 120 15000.00 []
+adm1 = Administrativo "Marta" 15000.00 "encargada"
+adm2 = Administrativo "Daniel" 4000.00 "cajero"
+
 --b) Definir una función que reciba una lista de empleados y devuelva el 
 --   nombre del docente que dicta mayor cantidad de materias.
+type Empleados = [Empleado]
+
+debnom:: Empleado -> Nombree
+debnom (Docente n _ _ _) = n
+debnom (Administrativo n _ _) = n
+
+tamat:: Empleado -> Int
+tamat (Docente _ _ _ xs)= length xs
+tamat (Administrativo _ _ _) = error "?"
+
+mayornm:: Empleados -> Nombree
+mayornm [] = error "?"
+mayornm [x] = debnom x
+mayornm (x:y:xs) = if (tamat x) >= (tamat y) then debnom x else mayornm (y:xs)
+
+emps = [(Docente "a" 12 1 ["","",""]),(Docente "b" 12 3 ["","","","",""]),(Docente "c" 12 4 ["","","","","",""])]
+emp1 = Docente "l" 12 3 [""]
+
 --c) Definir una función que reciba una lista de empleados y devuelva el
 --   nombre del empleado que tiene mayor salario mensual.
+listemp::Empleados -> Nombre
+listemp [] = error "?"
+listemp [x] = debnom x
+listemp (x:y:xs) = if (salario x >= salario y) then listemp (x:xs) else listemp (y:xs)
+
 --d) Definir una función que reciba un empleado (e) y una lista ordenada 
 --   ascendentemente de acuerdo al ingreso mensual percibido (ls) y que 
 --   inserte e en ls en la posición que le corresponde, de modo que la 
 --   lista resultante siga ordenada.
+insertem::Empleado -> Empleados -> Empleados
+insertem e [] = [e]
+insertem e (l:ls)= if (salario e >= salario l) then l:e:insertem e (ls) else l:insertem e ls
+
 --e) Definir una función que reciba una lista de empleados y devuelva la
 --   lista ordenada ascendentemente por ingresos mensuales del empelado.

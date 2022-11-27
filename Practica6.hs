@@ -31,7 +31,7 @@ verificarmat xs = and (vmat xs)
 --orden.
 
 --orden filas
-ordf [] c = True
+ordf [] c = error "?"
 ordf [_] c = True
 ordf (x:y:xs) c = (c x y)&&(ordf (y:xs) c)
 

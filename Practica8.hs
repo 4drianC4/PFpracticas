@@ -99,6 +99,7 @@ data Operadores a b = Suma a b | Resta a b | Division a b | Multiplicacion a b
 --   tres y guardan información únicamente en las hojas. Utilizando este
 --   tipo definir funciones para:
 
+
 --a) Calcular el total de hojas
 
 

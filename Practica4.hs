@@ -63,6 +63,10 @@ nrep xs = foldr (ret) [] xs
 --12. Una función que reciba una lista y retorne true si la lista está
 --ordenada ascendentemente, false en otro caso.
 
+asc xs = snd(foldr (fun) a xs)
+    where 
+        a = (last xs,True) 
+        fun ant (sig,b) = (ant,b && ant <= sig)
 
 --II. Sea la definición de la función foldl:
 --foldl () a [] = a
@@ -77,3 +81,8 @@ nrep xs = foldr (ret) [] xs
 --2. Hacer las anterior definiciones (1 al 12) utilizando foldl en lugar 
 --de foldr.
 
+--ordenar dos listas con recursividad y foldr
+orde xs ys = foldr (fun) ys xs
+
+fun d (x:xs) = if (d > x) then x:fun d xs else d:x:xs
+fun d [] = []

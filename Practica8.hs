@@ -46,6 +46,8 @@ nots = [(Cato 50 60), (Umss 70), (Umss 15), (Maestria 'B'), (Cato 15 70)]
 --   ordenadas (suponer que una nota de San Simón es mayor a un nota de
 --   la Cato y una de Maestría es mayor que una de la UMSS)
 compnot:: Nota -> Nota -> Bool 
+
+
 compnot (Umss x) (Maestria y) = False
 compnot (Maestria y) (Umss x) = True 
 compnot (Maestria x) (Cato n1 n2) = True 
@@ -98,16 +100,34 @@ data Operadores a b = Suma a b | Resta a b | Division a b | Multiplicacion a b
 --9. Definir un tipo de datos para modelar árboles que se bifurcan en 
 --   tres y guardan información únicamente en las hojas. Utilizando este
 --   tipo definir funciones para:
+data Triarbol a = Nada | Rama a (Triarbol a) (Triarbol a) (Triarbol a)
+    deriving Show 
 
+arb =   Rama 1 (Rama 2 (Rama 3 Nada Nada Nada) (Rama 4 Nada Nada Nada) 
+        (Rama 5 Nada Nada Nada)) (Rama 6 Nada Nada Nada) 
+        (Rama 7 (Rama 8 Nada Nada Nada) (Rama 9 (Rama 10 Nada Nada Nada) Nada Nada) Nada)
 
 --a) Calcular el total de hojas
-
+conth:: Triarbol a -> Int
+conth (Nada) = 0
+conth (Rama d h1 h2 h3) = 1 + (conth h1) + (conth h2) + (conth h3)
 
 --b) Calcular el total de nodos no terminales
+esnada :: Triarbol a -> Bool
+esnada Nada = False
+esnada (Rama _ _ _ _) = True
 
+hnovac::Triarbol a -> Int 
+hnovac (Nada) = 0
+hnovac (Rama d h1 h2 h3) =  if(esnada h1 || esnada h2 || esnada h3) 
+                                then 1 + (hnovac h1) + (hnovac h2) + (hnovac h3)
+                            else 0
 
 --c) Calcular la sumatoria de las hojas.
-
+--sumh::Triarbol Int -> Int
+--sumh (Rama n i c Nada) r = 
+--sumh (Rama n )
+--sumh (Rama n i c d) r = 
 
 --d) Comparar dos árboles.
 
@@ -156,3 +176,29 @@ data Operadores a b = Suma a b | Resta a b | Division a b | Multiplicacion a b
 --g) Utilizando la función foldTree definir las funciones de los 
 --   incisos a, b, c, e.
 --h) Añadir el tipo a la clase Eq
+
+--TIPO RECURSIVO
+data Lista a = Vacio | Add a (Lista a)
+    deriving Show
+
+list = Add 4(Add 3(Add 2(Add 1 Vacio)))
+--definir las funciones:
+--length
+milength:: Lista a -> Int
+milength Vacio = 0
+milength (Add x (xs)) = 1 + milength xs
+
+--map
+mimap :: (t -> a) -> Lista t -> Lista a
+mimap f Vacio = Vacio
+mimap f (Add x xs) = (Add (f x)) (mimap f (xs))
+
+--filter
+mifilter :: (a -> Bool) -> Lista a -> Lista a
+mifilter c Vacio = Vacio
+mifilter c (Add x xs) = if(c x) then (Add x) (mifilter c (xs)) else mifilter c xs
+
+--zipWith
+mizipwith f Vacio ys = Vacio
+mizipwith f xs Vacio = Vacio
+mizipwith f (Add x xs) (Add y ys) = (unir x y) (mizipwith f xs ys)

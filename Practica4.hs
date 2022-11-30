@@ -1,7 +1,6 @@
 --I. Definir en términos de foldr:
 --1. Una función que reciba una lista y devuelva la productoria de sus
 -- elementos
-
 multlis xs = foldr (*) 1 xs
 
 --2. map
@@ -13,7 +12,6 @@ mymap f rs= foldr (fun) [] rs
 myfilter f rs = foldr (fun) [] rs
     where
         fun x xs = if(f x == True)then x:xs else xs
-        
 
 --4. length
 mylength rs = foldr (f) 0 rs
@@ -41,8 +39,7 @@ mytakewhile c xs = foldr(f) [] xs
             else False
         f l ls = 
             if(con l == True) then l:ls
-            else ls    
-
+            else ls
 
 --9. Una función que reciba una lista de dígitos y devuelva el Nro. que se 
 -- forma al juntarlos.
@@ -80,9 +77,3 @@ nrep xs = foldr (ret) [] xs
 --2. Hacer las anterior definiciones (1 al 12) utilizando foldl en lugar 
 --de foldr.
 
-
-
-ejercicio xs = foldr fun 0 xs
-    where
-        fun x= if (modu x)then (+1) else (+0)
-        modu x = mod x 2 == 0

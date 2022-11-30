@@ -1,7 +1,7 @@
 --1. Definir una función que reciba una lista de listas y devuelva el 
 --1er. elemento de la 1ra. lista
 lis1:: [[a]] -> a
-lis1 xss = head (head xss) 
+lis1 xss = head (head xss)
 
 --2. Definir una función que reciba una lista de listas de funciones y un
 --elemento y aplica la 1ra función de la primera lista al elemento
@@ -12,7 +12,6 @@ lis2 fss x = head (head fss) x
 --segundo
 lis3:: [t] -> t
 lis3 x = head (tail x)
-
 
 --4. Definir una función que reciba una lista de elementos y devuelva el 
 --tercero
@@ -33,6 +32,7 @@ lis6 x = head(drop 2 (head(drop 3 (head(drop 1 x)))))
 --acuerdo a una función de orden.
 --lis7:: t2 -> [t1 -> t2] -> Bool
 lis7 fo l = and(map (l) (fo))
+
 --8. Definir una función que compare 2 listas y devuelva True si las
 --listas son iguales
 lis8 l1 l2 = and(zipWith (==) l1 l2)
@@ -62,14 +62,16 @@ transpuesta mss = map (obtenerColumna mss)[0..ultimaCol]
   where
     ultimaCol = (length (head mss))  -1
     obtenerColumna mss c = map (!!c) mss
-              
+            
 transpuesta1 ([]:_) = []
 transpuesta1 x = (map head x) : transpuesta1 (map tail x)
+
 --13. Definir una función que reciba 2 matrices y las multiplique
 doCasilla fs cs = sum(zipWith (*) fs cs)
 doFila css fs  = map (doCasilla fs) css
 doMat fss css = map (doFila css) fss
 multiplicacion ass bss = doMat ass (transpuesta bss)
+
 --14. Definir una función que reciba 3 matrices y las multiplique
 --15. Definir una función que reciba 4 matrices y las multiplique
 --16. Definir una función que reciba 1 matriz y una función de orden y 
@@ -88,6 +90,7 @@ esMatrizOrdenada2 fo mss = (and(map (estaOrdenada fo) mss)) && (and(zipWith fo c
   where 
     cabezas = map head mss
     colas = map last mss
+
 --17. Definir una función que reciba una lista de números y devuelva todos 
 --los números pares
 onPar xs = filter(comp) xs
@@ -191,9 +194,9 @@ mif x y g = g (x+1,y 5)
 
 mif:: Int -> (Int -> try ) -> ((Int , try ) -> trg ) -> trg
 
-fun11 x y z w u
-      |x (&&) y = (\a -> a>2)
-      |z && w = u
+--fun11 x y z w u
+--      |x (&&) y = (\a -> a>2)
+--      |z && w = u
 
 fun22 x y = x y
 
@@ -243,3 +246,5 @@ procesar ls ar = div (sum (map fun2(filter(fun1 ar)ls))) (length (filter (fun1 a
 --fun x y@(z,w) s 
 --      |x(\a -> a == 's') = s
 --      |z((>2)w) = y
+
+

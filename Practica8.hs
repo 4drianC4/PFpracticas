@@ -124,10 +124,10 @@ hnovac (Rama d h1 h2 h3) =  if(esnada h1 || esnada h2 || esnada h3)
                             else 0
 
 --c) Calcular la sumatoria de las hojas.
---sumh::Triarbol Int -> Int
---sumh (Rama n i c Nada) r = 
---sumh (Rama n )
---sumh (Rama n i c d) r = 
+sumh::Triarbol Int -> Int
+sumh (Nada) = 0
+--sumh (Rama n Nada Nada Nada) = n
+sumh (Rama n i c d) = n + (sumh i) + (sumh d) + (sumh c)
 
 --d) Comparar dos árboles.
 

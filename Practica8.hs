@@ -181,7 +181,8 @@ hnovac (Rama d h1 h2 h3) =  if(esnada h1 || esnada h2 || esnada h3)
 data Lista a = Vacio | Add a (Lista a)
     deriving Show
 
-list = Add 4(Add 3(Add 2(Add 1 Vacio)))
+list1 = Add 4(Add 3(Add 2(Add 1 Vacio)))
+list2 = Add 1(Add 2(Add 3 (Add 4 Vacio)))
 --definir las funciones:
 --length
 milength:: Lista a -> Int
@@ -198,7 +199,15 @@ mifilter :: (a -> Bool) -> Lista a -> Lista a
 mifilter c Vacio = Vacio
 mifilter c (Add x xs) = if(c x) then (Add x) (mifilter c (xs)) else mifilter c xs
 
---zipWith
-mizipwith f Vacio ys = Vacio
-mizipwith f xs Vacio = Vacio
-mizipwith f (Add x xs) (Add y ys) = (unir x y) (mizipwith f xs ys)
+--zip
+mizip :: Lista a -> Lista b -> Lista (a,b)
+mizip Vacio ys = Vacio
+mizip xs Vacio = Vacio
+mizip (Add x xs) (Add y ys) = (Add (x,y))(mizip xs ys)
+
+--zipwith
+mizipwith :: (t -> t -> a)-> Lista t -> Lista t -> Lista a
+mizipwith fun (Vacio) (ys) = Vacio
+mizipwith fun (xs) (Vacio) = Vacio
+mizipwith fun (Add x xs) (Add y ys) = (Add (fun x y))(mizipwith fun xs ys)
+

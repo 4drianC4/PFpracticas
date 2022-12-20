@@ -140,3 +140,25 @@ nummenor [x] = x
 nummenor (x:xs)
         |x <= (nummenor xs) = x
         |otherwise = (nummenor xs)
+
+data Lista a = Vacia | Add a (Lista a)
+    deriving Show
+data Natural = Cero | Sgte Natural 
+    deriving Show 
+
+dato = (Sgte (Sgte Cero))
+
+borrarVocales::Lista Char -> Lista Char
+borrarVocales Vacia = Vacia
+borrarVocales (Add x xs)
+                |x == 'a' = borrarVocales xs
+                |x == 'e' = borrarVocales xs
+                |x == 'i' = borrarVocales xs
+                |x == 'o' = borrarVocales xs
+                |x == 'u' = borrarVocales xs
+                |otherwise = (Add x (borrarVocales xs))   
+
+
+cuenta::Lista Int -> Int -> Natural
+cuenta Vacia n = Cero
+cuenta (Add x xs) n = if(x == n) then Sgte(cuenta xs n) else (cuenta xs n)

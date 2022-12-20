@@ -191,3 +191,27 @@ insertem e (l:ls)= if (salario e >= salario l) then l:e:insertem e (ls) else l:i
 
 --e) Definir una función que reciba una lista de empleados y devuelva la
 --   lista ordenada ascendentemente por ingresos mensuales del empelado.
+
+
+
+data Lista a = Empty | Add a (Lista a)
+data Arbol a = Hoja a | Rama (Arbol a) (Arbol a)
+
+--f::Lista Int -> [Int]
+--f Empty = []
+--f (Add l ls) = (gen l l)++(f ls)
+--    where
+--        gen x 0 = []
+--        gen x y = x:(gen x (y-1))
+
+
+
+f::Arbol Int -> (Lista Int, [Int])
+f (Hoja a) = if (mod a 2 == 0)then (Add a r, l)
+                else (r, a:l)
+    where
+        r = Empty
+        l = []
+f (Rama i d) = (f i)(f d)
+
+

@@ -211,3 +211,15 @@ mizipwith fun (Vacio) (ys) = Vacio
 mizipwith fun (xs) (Vacio) = Vacio
 mizipwith fun (Add x xs) (Add y ys) = (Add (fun x y))(mizipwith fun xs ys)
 
+
+--1. f (Add 7 (Add 2 (Add 4 (Add 7 empty))))
+--   f(7*5) + f (Add 2 (Add 4 (Add 7 empty)))
+--   f(35) + f(2*10) + f(Add 4 (Add 7 empty))
+--   f(35) + f(20) + f(4*10) + f(Add 7 empty)
+--   f(35) + f(20) + f(4*10) + f(7*5)
+
+
+
+f(0,k)=0
+f(n,k)=((f((div n 10),k+1))*10)+k
+

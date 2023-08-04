@@ -1,2 +1,2 @@
-# PFpracticas
-practicas de programación funcional 
+# Programación funcional en haskell
+practicas de programación funcional
